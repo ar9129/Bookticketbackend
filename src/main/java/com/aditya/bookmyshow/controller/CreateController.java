@@ -5,20 +5,21 @@ import com.aditya.bookmyshow.dto.TheatreDTO;
 import com.aditya.bookmyshow.model.*;
 import com.aditya.bookmyshow.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.chrono.ThaiBuddhistChronology;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("api/v1")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CreateController {
+    private static final Logger log = LoggerFactory.getLogger(CreateController.class);
+
 
     @Autowired
    private CityRepository cityRepository ;
@@ -46,6 +47,11 @@ public class CreateController {
         return cityRepository.save(city) ;
     }
 
+    @GetMapping("/get-city")
+    public  List<City>  getCity(){
+        return  cityRepository.findAll() ;
+    }
+
     @PostMapping("/create-theatre")
     public Theatre createTheatre(@RequestBody TheatreDTO theatreDTO){
         Optional<City>city1 = cityRepository.findById(theatreDTO.getCityID()) ;
@@ -60,12 +66,14 @@ public class CreateController {
 
         Screen screen1 = Screen.builder().name(screenDTO.getName()).theatre(theatre1.get()).build();
         Screen s = screenRepository.save(screen1);
+        log.info(screenDTO.getCategoryTOSeatNumber().toString());
         List<Seat> seats1 = new ArrayList<Seat>();
         for (Map.Entry<String, List<String>> entry : screenDTO.getCategoryTOSeatNumber().entrySet()) {
             String category = entry.getKey();
             List<String> seatNumbers = entry.getValue();
            // seats1 = new ArrayList<Seat>();
-
+            log.info(category);
+            log.info(seatNumbers.toString());
             Category category1 = Category.builder().categoryName(category).build();
             categoryRepository.save(category1);
             for (String seatNumber : seatNumbers) {

@@ -5,6 +5,6 @@ import com.aditya.bookmyshow.model.Movie;
 
 import java.util.List;
 
-public interface CityService {
-
-}
+//public interface CityService {
+//    public getMoviesBy
+//}

@@ -2,17 +2,10 @@ package com.aditya.bookmyshow.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,10 +35,25 @@ public class Show {
 	@Column(name = "start_time", nullable = false)
 	Date startTime;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
 	List<ShowSeat> seatForShows;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
 	List<Booking> bookings;
-	
+
+	String language ;
+
+	String format ;
+
+
+	@ElementCollection
+	@CollectionTable(name = "show_category_price",
+			joinColumns = @JoinColumn(name = "show_id"))
+	@MapKeyColumn(name = "category")
+	@Column(name = "price")
+	Map<String, Integer> categoryToPrice ;
+
+
 }
