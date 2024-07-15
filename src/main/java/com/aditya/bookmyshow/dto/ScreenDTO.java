@@ -15,3 +15,5 @@ public class ScreenDTO {
     private Long theatreID ;
     private Map<String, List<String>> categoryTOSeatNumber ;
 }
+
+

@@ -1,10 +1,9 @@
 package com.aditya.bookmyshow.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "movies")
@@ -23,7 +22,16 @@ public class Movie {
 	
 	int duration;
 
+	@ElementCollection
+	@CollectionTable(name = "movie_language_format",
+			joinColumns = @JoinColumn(name = "movie_id"))
+	@MapKeyColumn(name = "language")
+	@Column(name = "formats")
+	Map<String, List<String>> languageFormat;
 
-	
+	List<String> genre ;
 
+
+
+	String url ;
 }

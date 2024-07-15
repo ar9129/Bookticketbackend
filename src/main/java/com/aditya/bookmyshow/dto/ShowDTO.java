@@ -12,5 +12,7 @@ public class ShowDTO {
     private Long screenID ;
     private Date startTime ;
     private Map<Long, Integer>categoryToPrice ;
+    private  String language ;
+    private  String format ;
 
 }
