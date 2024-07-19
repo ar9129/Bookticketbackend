@@ -34,4 +34,6 @@ public class Movie {
 
 
 	String url ;
+
+
 }
