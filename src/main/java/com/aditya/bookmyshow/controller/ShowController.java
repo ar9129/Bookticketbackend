@@ -13,6 +13,8 @@ import java.util.*;
 @RestController
 @RequestMapping("api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins =  "http://192.168.1.122:3000")
+//@CrossOrigin(origins =  "http://192.168.1.190:3000")
 public class ShowController {
 
     private static final Logger log = LoggerFactory.getLogger(CreateController.class);

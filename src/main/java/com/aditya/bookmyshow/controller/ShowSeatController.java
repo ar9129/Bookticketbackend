@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins =  "http://192.168.1.1222:3000")
+//@CrossOrigin(origins =  "http://192.168.1.190:3000")
 public class ShowSeatController {
 
     private static final Logger log = LoggerFactory.getLogger(ShowSeatController.class);
